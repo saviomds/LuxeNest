@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Register - LuxeNest</title>
+    <link rel="stylesheet" href="/css/auth.css" />
+  </head>
+  <body>
+    <div class="login-container">
+      <form action="/login" method="POST" class="login-form">
+        <h1 class="form-title">Welcome Back</h1>
+        <p class="form-subtitle">Register to continue</p>
+        <% if (typeof error !== "undefined") { %>
+        <div class="error-message"><%= error %></div>
+        <% } %>
+        <div class="form-group">
+          <label for="name">Name</label>
+          <input
+            type="text"
+            id="name"
+            name="name"
+            placeholder="Enter your full name"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="Phone">Phone</label>
+          <input
+            type="text"
+            id="phone"
+            name="phone"
+            placeholder="Enter your Phone Number"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            placeholder="Enter your email"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input
+            type="password"
+            id="password"
+            name="password"
+            placeholder="Enter your password"
+            required
+          />
+        </div>
+        <button type="submit" class="btn-submit">Register</button>
+        <p class="form-footer">
+          Do have an account? <a href="/login">Log in</a>
+        </p>
+      </form>
+    </div>
+  </body>
+</html>

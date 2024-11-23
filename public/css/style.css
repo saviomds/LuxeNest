@@ -1,0 +1,134 @@
+/* Global Styles */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+  color: #333;
+  height: 100%; /* Full height for proper centering */
+}
+
+html {
+  height: 100%; /* Ensure html has full height */
+}
+
+/* Hero Section */
+.hero {
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Center vertically */
+  align-items: center; /* Center horizontally */
+  text-align: center;
+  height: 100vh; /* Full viewport height */
+  background-color: #000;
+  color: #fff;
+  margin: 0; /* Remove default margin for alignment */
+}
+
+.hero h1 {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.6); /* Subtle glow for the heading */
+}
+
+.hero p {
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+}
+
+/* CTA Button */
+.hero .cta {
+  padding: 0.8rem 2rem;
+  font-size: 5rem;
+  background-color: transparent;
+  color: #fff;
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.6),
+    0 0 20px rgba(255, 255, 255, 0.4), 0 0 30px rgba(255, 255, 255, 0.3); /* Glowing text effect */
+  transition: text-shadow 0.3s ease-in-out;
+}
+
+.hero .cta:hover {
+  text-shadow: 0 0 15px rgba(255, 255, 255, 0.8),
+    0 0 25px rgba(255, 255, 255, 0.6), 0 0 35px rgba(255, 255, 255, 0.5); /* Brighter glow on hover */
+}
+.language-toggle {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  display: flex;
+  gap: 10px;
+}
+
+.lang-btn {
+  font-size: 1rem;
+  color: #fff;
+  text-decoration: none;
+  padding: 0.5rem;
+  background-color: #333;
+  border-radius: 4px;
+}
+
+.lang-btn:hover {
+  background-color: #555;
+}
+
+/* Media Queries */
+
+/* Large Screens (Desktops and Laptops) */
+@media (min-width: 1024px) {
+  .hero h1 {
+    font-size: 4rem;
+  }
+
+  .hero .cta {
+    font-size: 6rem;
+  }
+}
+
+/* Medium Screens (Tablets) */
+@media (max-width: 1023px) and (min-width: 768px) {
+  .hero h1 {
+    font-size: 3rem;
+  }
+
+  .hero .cta {
+    font-size: 4rem;
+  }
+}
+
+/* Small Screens (Phones) */
+@media (max-width: 767px) {
+  .hero {
+    padding: 1rem;
+    height: 100vh; /* Ensure full viewport height */
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+
+  .hero p {
+    font-size: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .hero .cta {
+    font-size: 3rem;
+    padding: 0.5rem 1rem;
+    letter-spacing: 1px;
+  }
+}
+
+/* Extra Small Screens (Very Small Phones) */
+@media (max-width: 480px) {
+  .hero h1 {
+    font-size: 2rem;
+  }
+
+  .hero .cta {
+    font-size: 2.5rem;
+    padding: 0.5rem 1rem;
+  }
+}

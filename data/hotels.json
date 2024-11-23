@@ -1,0 +1,20 @@
+[
+  {
+    "id": 1001,
+    "name": "Grand Luxury Hotel",
+    "location": "Downtown City Center",
+    "description": "Experience the epitome of luxury in the heart of the city."
+  },
+  {
+    "id": 1002,
+    "name": "Cozy Motel Retreat",
+    "location": "Countryside",
+    "description": "A tranquil escape with all the comforts of home."
+  },
+  {
+    "id": 1003,
+    "name": "Skyline Boutique Hotel",
+    "location": "Uptown Skyline",
+    "description": "Modern design and breathtaking views of the city skyline."
+  }
+]

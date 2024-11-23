@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/style.css" />
+    <title><%= title %></title>
+  </head>
+  <body>
+    <!-- Language toggle links -->
+    <div class="language-toggle">
+      <a href="/set-language?lang=en" class="lang-btn">En</a>
+      <a href="/set-language?lang=fr" class="lang-btn">Fr</a>
+    </div>
+    <header class="hero">
+      <a href="/Book" class="cta"><%= message %></a>
+    </header>
+
+    <script>
+      setTimeout(() => {
+        window.location.href = "<%= redirectUrl %>";
+      }, 5000); // Redirect after 3 seconds
+    </script>
+  </body>
+</html>

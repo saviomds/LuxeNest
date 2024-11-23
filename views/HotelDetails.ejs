@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/css/hotelDetails.css" />
+  </head>
+  <body>
+    <header>
+      <h1><%= title %></h1>
+      <p><%= message %></p>
+    </header>
+
+    <div class="container">
+      <div class="hotel-detail">
+        <h1><%= hotel.name %></h1>
+        <p><%= hotel.description %></p>
+        <p><strong>Location:</strong> <%= hotel.location %></p>
+
+        <!-- Check if user is logged in -->
+        <% if (user) { %>
+        <!-- If logged in, show the 'Book Now' button -->
+        <a href="/book/hotel/<%= hotel.id %>/book" class="btn">Book Now</a>
+        <% } else { %>
+        <!-- If not logged in, prompt for login/register --><br />
+        <br />
+        <p>
+          You need to <a href="/login">Login</a> or
+          <a href="/register">Register</a> to book this hotel. <br />
+
+          <a href="/login" class="btn">Login</a>
+        </p>
+        <% } %>
+
+        <div class="hotel-id">
+          <p><strong>Hotel ID:</strong> <%= hotel.id %></p>
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      <p>&copy; 2024 LuxeNest. All Rights Reserved.</p>
+    </footer>
+  </body>
+</html>

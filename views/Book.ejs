@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/css/book.css" />
+  </head>
+  <body>
+    <header class="header">
+      <h1><%= title %></h1>
+      <h1><%= message %></h1>
+      <p><%= paragraph %></p>
+    </header>
+
+    <main class="book-container">
+      <% hotels.forEach(hotel => { %>
+      <div class="card">
+        <h2><%= hotel.name %></h2>
+        <p class="location"><%= hotel.location %></p>
+        <p class="description"><%= hotel.description %></p>
+        <a href="/book/hotel/<%= hotel.id %>" class="cta"><%= bookbtn %></a>
+      </div>
+      <% }); %>
+    </main>
+  </body>
+</html>
