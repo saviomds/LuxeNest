@@ -8,12 +8,15 @@
   </head>
   <body>
     <div class="login-container">
-      <form action="/login" method="POST" class="login-form">
+      <form action="/register" method="POST" class="login-form">
         <h1 class="form-title">Welcome Back</h1>
         <p class="form-subtitle">Register to continue</p>
         <% if (typeof error !== "undefined") { %>
         <div class="error-message"><%= error %></div>
+        <% } %> <% if (typeof success !== "undefined") { %>
+        <div class="success-message"><%= success %></div>
         <% } %>
+
         <div class="form-group">
           <label for="name">Name</label>
           <input
@@ -21,6 +24,7 @@
             id="name"
             name="name"
             placeholder="Enter your full name"
+            value="<%= name || '' %>"
             required
           />
         </div>
@@ -31,6 +35,7 @@
             id="phone"
             name="phone"
             placeholder="Enter your Phone Number"
+            value="<%= phone || '' %>"
             required
           />
         </div>
@@ -41,6 +46,7 @@
             id="email"
             name="email"
             placeholder="Enter your email"
+            value="<%= email || '' %>"
             required
           />
         </div>

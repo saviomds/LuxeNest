@@ -1,6 +1,8 @@
 import path from "path";
 import { fileURLToPath } from "url";
 import fs from "fs";
+import User from "../models/User.js";
+import bcrypt from "bcryptjs";
 
 // json file work i wasnt work bcz of assert I decide to use Stick with CommonJS
 const __filename = fileURLToPath(import.meta.url);
@@ -118,31 +120,101 @@ export const handleBookNow = (req, res) => {
 
 // Login Page
 export const getLoginPage = (req, res) => {
-  res.render("Login");
+  res.render("Login", { email: "" }); // Provide default email value
 };
+export const handleLogin = async (req, res) => {
+  const { email, password } = req.body;
 
-// Handle Login
-export const handleLogin = (req, res) => {
-  const { email, password } = req.body || {}; // Safely destructure to avoid undefined errors
+  try {
+    // Find user by email
+    const user = await User.findOne({ email });
+    if (!user) {
+      return res
+        .status(400)
+        .render("Login", { error: "User not found. 🤔", email: email || "" });
+    }
 
-  if (!email || !password) {
-    return res.render("Login", { error: "Email and password are required!" });
-  }
+    // Compare the entered password with the stored hash
+    const isMatch = await bcrypt.compare(password, user.password);
+    if (!isMatch) {
+      return res
+        .status(400)
+        .render("Login", { error: "Invalid password. 🤷", email });
+    }
 
-  // Placeholder for authentication logic
-  if (email === "admin@luxenest.com" && password === "password") {
-    return res.redirect("/dashboard"); // Redirect to dashboard
-  } else {
-    return res.render("Login", { error: "Invalid email or password!" });
+    // Password matches - set session and redirect
+    req.session.user = {
+      email: user.email,
+      name: user.name,
+    };
+
+    return res.redirect("/Dash"); // Redirect to the home page or dashboard
+  } catch (err) {
+    console.error(err);
+    // Ensure proper error rendering
+    return res
+      .status(500)
+      .render("Login", { error: "Server error. 🚩", email: email || "" });
   }
 };
 
 // Register Page
 export const getRegisterPage = (req, res) => {
-  res.render("Register");
+  res.render("Register", {
+    name: "",
+    phone: "",
+    email: "",
+    error: "",
+    success: "",
+  });
+};
+export const handleRegister = async (req, res) => {
+  const { name, phone, email, password } = req.body;
+
+  try {
+    const saltRounds = 10; // Higher numbers increase security but also processing time
+    const hashedPassword = await bcrypt.hash(password, saltRounds);
+
+    const newUser = new User({ name, phone, email, password: hashedPassword });
+    await newUser.save();
+
+    // Clear fields on successful registration
+    return res.render("Register", {
+      success: "Registration successful, You may now login 🤩",
+      name: "",
+      phone: "",
+      email: "",
+    });
+  } catch (err) {
+    console.error(err);
+    // Pass the entered data back to the view in case of an error
+    return res.status(400).render("Register", {
+      error: "Error registering user. Email might already exist 😕.",
+      name: name || "",
+      phone: phone || "",
+      email: email || "",
+    });
+  }
+};
+export const getDashboard = (req, res) => {
+  // Ensure the user is logged in
+  if (!req.session.user) {
+    return res.redirect("/login"); // Redirect to login if not authenticated
+  }
+
+  // Extract email and name from session
+  const { email, name } = req.session.user;
+
+  // Pass the email and name to the Dash view
+  res.render("Dash", { email, name });
 };
 
-// Handle Register
-export const handleRegister = (req, res) => {
-  const { name, phone, email, password } = req.body || {}; // Safely destructure to avoid undefined errors
+export const handleLogout = (req, res) => {
+  req.session.destroy((err) => {
+    if (err) {
+      console.error(err);
+      return res.redirect("/");
+    }
+    res.redirect("/login");
+  });
 };

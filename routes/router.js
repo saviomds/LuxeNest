@@ -9,6 +9,8 @@ import {
   setLanguage,
   getHotelDetails,
   handleBookNow,
+  handleLogout,
+  getDashboard,
 } from "../controllers/controller.js";
 export const router = express.Router();
 
@@ -25,3 +27,7 @@ router.get("/register", getRegisterPage);
 router.post("/register", handleRegister);
 // Route for changing language
 router.get("/set-language", setLanguage);
+router.get("/Dash", getDashboard);
+
+// logout
+router.get("/Logout", handleLogout);
